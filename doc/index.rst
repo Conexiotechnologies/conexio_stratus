@@ -4,7 +4,7 @@ Conexio Stratus
 ###############
 
 .. figure:: img/stratus-top.png
-     :width: 400px
+     :width: 600px
      :align: center
      :alt: Conexio Stratus
 
@@ -59,7 +59,7 @@ Supported Features
 ==================
 
 .. figure:: img/stratus-features.png
-   :width: 600px
+   :width: 800px
    :align: center
    :alt: Conexio Stratus Features
 
@@ -99,7 +99,7 @@ hardware features:
 Pin Mapping
 -----------
 .. figure:: img/stratus-pinouts.png
-   :width: 700px
+   :width: 900px
    :align: center
    :alt: Conexio Stratus Pinouts
 
