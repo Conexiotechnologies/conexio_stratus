@@ -1,8 +1,9 @@
 /*
- * Copyright (c) 2021 Conexio Technologies, Inc
+ * Copyright (c) 2022 Conexio Technologies, Inc
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+#include "conexio_stratus_common-pinctrl.dtsi"
 
 / {
 	model = "Conexio Stratus";
@@ -25,7 +26,7 @@
 	pwmleds {
 		compatible = "pwm-leds";
 		pwm_led0: pwm_led_0 {
-			pwms = <&pwm0 3>;
+			pwms = <&pwm0 0 PWM_MSEC(20) PWM_POLARITY_INVERTED>;
 		};
 	};
 
@@ -51,8 +52,8 @@
 		#gpio-cells = <2>;
 		gpio-map-mask = <0xffffffff 0xffffffc0>;
 		gpio-map-pass-thru = <0 0x3f>;
-		gpio-map = <0 0 &gpio0 13 0>,   /* A0 */
-		        <1 0 &gpio0 14 0>,   /* A1 */
+		gpio-map = <0 0 &gpio0 13 0>,  /* A0 */
+				<1 0 &gpio0 14 0>,   /* A1 */
 				<2 0 &gpio0 15 0>,   /* A2 */
 				<3 0 &gpio0 16 0>,   /* A3 */
 				<4 0 &gpio0 17 0>,   /* A4 */
@@ -85,7 +86,15 @@
 		io-channels = <&adc 7>;
 		output-ohms = <100000>;
 		full-ohms = <(100000 + 100000)>;
-		power-gpios = <&gpio0 25 0>;
+		power-gpios = <&gpio0 25 GPIO_ACTIVE_HIGH>;
+	};
+
+	sensor-pwr-ctrl {
+		compatible = "regulator-fixed-sync", "regulator-fixed";
+		label = "sensor-pwr-ctrl";
+		regulator-name = "sensor-pwr-ctrl";
+		enable-gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>;
+		regulator-boot-on;
 	};
 };
 
@@ -104,69 +113,62 @@
 &uart0 {
 	status = "okay";
 	current-speed = <115200>;
-	tx-pin = <6>;
-	rx-pin = <5>;
+	pinctrl-0 = <&uart0_default>;
+	pinctrl-1 = <&uart0_sleep>;
+	pinctrl-names = "default", "sleep";
 };
 
 &uart1 {
 	current-speed = <115200>;
-	tx-pin = <0>;
-	rx-pin = <1>;
+	pinctrl-0 = <&uart1_default>;
+	pinctrl-1 = <&uart1_sleep>;
+	pinctrl-names = "default", "sleep";
 };
 
 &uart2 {
-	tx-pin = <24>;
-	rx-pin = <23>;
+	pinctrl-0 = <&uart2_default>;
+	pinctrl-1 = <&uart2_sleep>;
+	pinctrl-names = "default", "sleep";
 };
 
 &i2c1 {
-	/* clock-frequency = <I2C_BITRATE_FAST>;*/
-	
 	compatible = "nordic,nrf-twim";
 	status = "okay";
-	sda-pin = <26>;
-	scl-pin = <27>;
+
+	pinctrl-0 = <&i2c1_default>;
+	pinctrl-1 = <&i2c1_sleep>;
+	pinctrl-names = "default", "sleep";
 
 	lis2dh@18 {
 		compatible = "st,lis2dh";
+		label = "LIS2DH";
 		reg = <0x18>;
 		irq-gpios = <&gpio0 29 GPIO_ACTIVE_HIGH>;
-		label = "LIS2DH";
 		disconnect-sdo-sa0-pull-up;
 	};
 
 	sht4x@44 {
-		status = "okay";
 		compatible = "sensirion,sht4x";
-		reg = <0x44>;
 		label = "SHT4X";
+		reg = <0x44>;
 		repeatability = <2>;
 	};
+
+};
+
+&pwm0 {
+	status = "okay";
+	pinctrl-0 = <&pwm0_default>;
+	pinctrl-1 = <&pwm0_sleep>;
+	pinctrl-names = "default", "sleep";
 };
 
 &spi3 {
 	compatible = "nordic,nrf-spim";
 	status = "okay";
-	sck-pin = <19>;
-	mosi-pin = <21>;
-	miso-pin = <22>;
-};
-
-&pwm0 {
-	status = "okay";
-	ch0-pin = <3>;
-};
-
-&pwm1 {
-	status = "okay";
-};
-
-&pwm2 {
-	status = "okay";
-};
-
-&pwm3 {
-	status = "okay";
+	pinctrl-0 = <&spi3_default>;
+	pinctrl-1 = <&spi3_sleep>;
+	pinctrl-names = "default", "sleep";
 };
 
 &timer0 {
@@ -238,3 +240,4 @@
 
 /* Include partition configuration file */
 #include "conexio_stratus_partition_conf.dts"
+

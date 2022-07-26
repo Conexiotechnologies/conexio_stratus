@@ -55,6 +55,8 @@ More information about the board can be found at the
 Hardware
 ********
 
+The detailed information about the on-board hardware can be found at the `Conexio Stratus Product Website`_.
+
 Supported Features
 ==================
 
@@ -120,7 +122,7 @@ Push buttons and Switches
 * BUTTON1 = P0.12
 * RESET
 
-Micro-USB Connector
+USB-C Connector
 -------------------
 
 The Conexio Stratus embedds a USB/UART connection for communicating with a host PC,
@@ -154,6 +156,8 @@ Building an application
 Applications on the Conexio Stratus may contain a Secure and a Non-Secure (ns) firmware image.
 However, in most of the applications one can use the ``ns`` target with any of the Zephyr
 or Nordic nRF SDK based samples using ``-DBOARD=conexio_stratus_ns``.
+
+More information can be found in the `Stratus "Getting Started" Guide`_.
 
 Flashing
 ========
@@ -202,9 +206,15 @@ You can build and flash the examples to make sure Zephyr is running correctly on
 your Stratus board. The button and LED definitions can be found in
 :zephyr_file:`boards/arm/conexio_stratus/conexio_stratus_common.dts`.
 
+Sample applications can be found in the `Stratus Git repo`_.
+
 References
 **********
 
 .. target-notes::
 
 .. _Conexio Stratus Product Website: https://conexiotech.com/
+
+.. _Stratus "Getting Started" Guide: https://github.com/Conexiotechnologies/conexio-stratus-firmware
+
+.. _Stratus Git repo: https://github.com/Conexiotechnologies/
