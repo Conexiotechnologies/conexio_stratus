@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2022 Nordic Semiconductor
  * Copyright (c) 2022 Conexio Technologies, Inc
  *
  * SPDX-License-Identifier: Apache-2.0
@@ -41,9 +42,14 @@
 	/* These aliases are provided for compatibility with samples */
 	aliases {
 		led0 = &blue_led; /* For user programmable purpose */
-		bootloader-led0 = &blue_led; /* For MCUBoot */
+		bootloader-led0 = &blue_led;
+		mcuboot-led0 = &blue_led; /* For MCUBoot */
 		pwm-led0 = &pwm_led0;
 		sw0 = &button0; /* For user button */
+		mcuboot-button0 = &button0;
+		watchdog0 = &wdt0;
+		accel0 = &lis2dh;
+		sht4x0 = &sht4x;
 	};
 
 	/* Used for accessing other pins */
@@ -139,15 +145,14 @@
 	pinctrl-1 = <&i2c1_sleep>;
 	pinctrl-names = "default", "sleep";
 
-	lis2dh@18 {
+	lis2dh: lis2dh@18 {
 		compatible = "st,lis2dh";
-		label = "LIS2DH";
 		reg = <0x18>;
 		irq-gpios = <&gpio0 29 GPIO_ACTIVE_HIGH>;
 		disconnect-sdo-sa0-pull-up;
 	};
 
-	sht4x@44 {
+	sht4x: sht4x@44 {
 		compatible = "sensirion,sht4x";
 		label = "SHT4X";
 		reg = <0x44>;
