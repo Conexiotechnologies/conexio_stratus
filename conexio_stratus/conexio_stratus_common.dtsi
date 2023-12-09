@@ -245,5 +245,5 @@
 };
 
 /* Include partition configuration file */
-#include "conexio_stratus_partition_conf.dts"
+#include "conexio_stratus_partition_conf.dtsi"
 
