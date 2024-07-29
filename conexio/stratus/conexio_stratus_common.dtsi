@@ -1,6 +1,5 @@
 /*
- * Copyright (c) 2022 Nordic Semiconductor
- * Copyright (c) 2023 Conexio Technologies, Inc
+ * Copyright (c) 2024 Conexio Technologies, Inc
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -97,8 +96,7 @@
 	};
 
 	sensor-pwr-ctrl {
-		compatible = "regulator-fixed-sync", "regulator-fixed";
-		label = "sensor-pwr-ctrl";
+		compatible = "regulator-fixed";
 		regulator-name = "sensor-pwr-ctrl";
 		enable-gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>;
 		regulator-boot-on;
@@ -155,7 +153,6 @@
 
 	sht4x: sht4x@44 {
 		compatible = "sensirion,sht4x";
-		label = "SHT4X";
 		reg = <0x44>;
 		repeatability = <2>;
 	};

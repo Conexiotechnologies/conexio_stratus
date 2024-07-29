@@ -1,12 +1,12 @@
-identifier: conexio_stratus
-name: Conexio-Stratus
+identifier: conexio_stratus/nrf9160/ns
+name: Conexio-Stratus-Non-Secure
 type: mcu
 arch: arm
 toolchain:
   - gnuarmemb
   - xtools
   - zephyr
-ram: 64
+ram: 128
 flash: 256
 supported:
   - gpio
