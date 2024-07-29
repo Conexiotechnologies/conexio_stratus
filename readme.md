@@ -11,22 +11,21 @@ hardware available on its supported Boards, as well as that hardware’s initial
 Since the Conexio Stratus board definition files are not yet included in the Zephyr mainstream, developers are asked to directly download the 
 board files in zip format, extract/unzip, and copy the conexio_stratus folder and place it in the NCS directory:
 ```
-ncs/v2.5.0/zephyr/boards/arm
+ncs/v2.7.0/zephyr/boards
 ```
 
 You should now see a folder named conexio_stratus among other supported board files. Using the board 
-target as `conexio_stratus_ns` you can build Zephyr applications for the Stratus board in non-secure mode.
+target as `conexio_stratus/nrf9160/ns` you can build Zephyr applications for the Stratus board in non-secure mode.
 
 ```
 └── ncs/
-    └── v2.5.0/
+    └── v2.7.0/
         ├── zephyr/
         │   └── boards/
-        │       └── arm/
-        │           ├── ...
-        │           ├── ...
-        │           ├── conexio_stratus
-        │           └── ...
+        │       ├── ...
+        │       ├── ...
+        │       ├── conexio
+        │           └── stratus
         ├── bootloader
         ├── modules
         ├── nrf
